@@ -154,7 +154,7 @@ class Server(object):
         except Exception as e:
             # Log the error and wait a bit to retry
             logger.error('Error trying to receive messages: %s' % e)
-            delay = 5.00
+            reactor.stop()  # daphne will be restarted by docker
         else:
             if channel:
                 # Deal with the message
